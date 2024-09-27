@@ -34,8 +34,7 @@ func Output(flag string, text string, banner string) {
 	finalResult = Print_art(file[1:], splitted_line, lines_count)
 
 	if len(os.Args) > 1 && (strings.HasPrefix(os.Args[1], "--output=")) && (strings.HasSuffix(os.Args[1], ".txt")) {
-		ExtractName := strings.Split(os.Args[1], "=")
-		filename := ExtractName[1]
+		filename := MySplit(os.Args[1])
 		file, err := os.Create(filename)
 		if err != nil {
 			fmt.Println("Error creating a file:", err)
@@ -52,4 +51,17 @@ func Output(flag string, text string, banner string) {
 		fmt.Println("Usage: go run . [OPTION] [STRING] [BANNER]\n\nEX: go run . --output=<fileName.txt> something standard")
 		return
 	}
+}
+
+// this function gives me the part of the string after --output=
+func MySplit(s string) string {
+	slice := []rune(s)
+
+	for i := 0; i < len(slice); i++ {
+		if slice[i] == '=' {
+			slice = slice[i+1:]
+			break
+		}
+	}
+	return string(slice)
 }
