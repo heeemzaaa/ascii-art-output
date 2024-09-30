@@ -12,7 +12,7 @@ func FsArgument(text string, banner string) {
 	if os.Args[2] == "thinkertoy" || os.Args[2] == "standard" || os.Args[2] == "shadow" {
 		name = os.Args[2]
 	} else {
-		fmt.Println("incorrect banner")
+		fmt.Println("Usage: go run . [STRING] [BANNER]\n\nEX: go run . something standard")
 		return
 	}
 	file := Read_file(name)

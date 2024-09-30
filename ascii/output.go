@@ -35,6 +35,10 @@ func Output(flag string, text string, banner string) {
 
 	if len(os.Args) > 1 && (strings.HasPrefix(os.Args[1], "--output=")) && (strings.HasSuffix(os.Args[1], ".txt")) {
 		filename := MySplit(os.Args[1])
+		if filename == ".txt" {
+			fmt.Println("Usage: go run . [OPTION] [STRING] [BANNER]\n\nEX: go run . --output=<fileName.txt> something standard")
+			return
+		}
 		file, err := os.Create(filename)
 		if err != nil {
 			fmt.Println("Error creating a file:", err)
